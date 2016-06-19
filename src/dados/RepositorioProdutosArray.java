@@ -15,7 +15,7 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 	}
 
 	@Override
-	public void cadastrar(Produto produto) throws ProdutoJaCadastrado {
+	public void cadastrar(Produto produto) throws ProdutoJaCadastradoException {
 		for (int i = 0; i <= tamanho; i++) {
 			// quando a inserção vai estourar o tamanho do repositório, o
 			// programa cria um auxiliar para salvar os produtos anteriores e
@@ -41,7 +41,7 @@ public class RepositorioProdutosArray implements RepositorioProdutos {
 			}
 			// se achar um produto com o nome igual
 			else if (arrayDeProdutos[i].getNome() == produto.getNome()) {
-				throw new ProdutoJaCadastrado();
+				throw new ProdutoJaCadastradoException();
 			}
 			// se houver um espaço nulo no array
 		}

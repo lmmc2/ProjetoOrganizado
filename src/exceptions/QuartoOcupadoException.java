@@ -1,5 +1,5 @@
-package classesbasicas;
-
+package exceptions;
+import classesbasicas.Cliente;
 public class QuartoOcupadoException extends Exception {
 	/**
 	 * 

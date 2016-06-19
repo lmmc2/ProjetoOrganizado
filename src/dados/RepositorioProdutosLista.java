@@ -13,12 +13,12 @@ public class RepositorioProdutosLista implements RepositorioProdutos {
 
 	@Override
 	// aqui cadastra
-	public void cadastrar(Produto produto) throws ProdutoJaCadastrado {
+	public void cadastrar(Produto produto) throws ProdutoJaCadastradoException {
 		if (this.proximo == null) {
 			this.proximo = new RepositorioProdutosLista();
 			this.proximo.produto = produto;
 		} else if (this.produto.getNome() == produto.getNome()) {
-			throw new ProdutoJaCadastrado();
+			throw new ProdutoJaCadastradoException();
 		} else {
 			this.proximo.cadastrar(produto);
 		}

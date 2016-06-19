@@ -92,28 +92,7 @@ public class RepositorioClientesArray implements RepositorioClientes { // cadast
 		}
 		return existe;
 		
-	}
-	
-		public void pedido(Produto produto, int qtde, String CPF) throws ClienteNaoEncontradoException, ProdutoNaoCadastradoException{
-			String nome = produto.getNome();
-			boolean achou = false;
-			if(produto != (RepositorioProdutos.procurar(nome)) ){
-				throw new ProdutoNaoCadastradoException();
-			} else {
-				for(int i = 0; i<indice || !achou ; i++){
-					if(ArrayClientes[i].getCPF().equals(CPF)){
-						ArrayClientes[i].setGastos(produto.getPreco() * qtde);
-						achou = true;
-					}
-				}
-				if(!achou){
-					throw new ClienteNaoEncontradoException();
-				}
-				
-			}
-		
-		}
-		
+	}	
 		public void zerarGastos(String CPF) throws ClienteNaoEncontradoException{
 			boolean achou = false;
 			for(int i = 0; i<indice; i++){

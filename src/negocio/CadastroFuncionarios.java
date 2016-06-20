@@ -1,5 +1,5 @@
 package negocio;
-import classesbasicas.Funcionario;
+import classesBasicas.Funcionario;
 import dados.RepositorioFuncionarios;
 import exceptions.*;
 
@@ -16,6 +16,31 @@ public class CadastroFuncionarios {
 		} else {
 			throw new FuncionarioJaCadastradoException();
 		}
+	}
+	
+	public void atualizar(Funcionario funcionario) throws FuncionarioNaoEncontradoException{
+		if (repositorio.existe(funcionario.getCPF())) {
+			repositorio.atualizar(funcionario);
+		} else {
+			throw new FuncionarioNaoEncontradoException();
+		}
+	}
+	
+	public void remover(String CPF) throws FuncionarioNaoEncontradoException{
+		if (repositorio.existe(CPF)) {
+			repositorio.remover(CPF);
+		} else {
+			throw new FuncionarioNaoEncontradoException();
+		}
+	}
+	
+	public Funcionario procurar(String CPF) throws FuncionarioNaoEncontradoException{
+		if (repositorio.existe(CPF)) {
+			return repositorio.procurar(CPF);
+		} else {
+			throw new FuncionarioNaoEncontradoException();
+		}
+		
 	}
 
 }

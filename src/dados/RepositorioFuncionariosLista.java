@@ -1,6 +1,5 @@
 package dados;
-import classesbasicas.Funcionario;
-import exceptions.*;
+import classesBasicas.Funcionario;
 
 public class RepositorioFuncionariosLista implements RepositorioFuncionarios {
 	private Funcionario funcionario;
@@ -37,43 +36,32 @@ public class RepositorioFuncionariosLista implements RepositorioFuncionarios {
 		}
 	}
 	
-	public Funcionario procurar(String CPF) throws FuncionarioNaoEncontradoException{
-		// percorro a lista enquanto nao encontrar o funcionario e o proximo nao for nulo
-		if (this.proximo != null){
-			if (this.funcionario.getCPF().equals(CPF)){
-				return this.funcionario;
-			} else { 
-				return this.proximo.procurar(CPF);
-			}
-		} else { // se chegou no fim e nao encontrou o funcionario
-			throw new FuncionarioNaoEncontradoException();
+	public Funcionario procurar(String CPF) {
+		// percorro a lista enquanto nao encontrar o funcionario 
+		if (this.funcionario.getCPF().equals(CPF)){
+			return this.funcionario;
+		} else { 
+			return this.proximo.procurar(CPF);
 		}
+		
 	}
 	
-	public void remover(String CPF) throws FuncionarioNaoEncontradoException{
+	public void remover(String CPF) {
 		// percorro a lista procurando o funcionario a ser removido
-		if (this.proximo != null){ // se ainda nao chegou ao fim da lista
-			if (this.funcionario.getCPF().equals(CPF)){ // vejo se esse eh o funcionario procurado
-				this.funcionario = this.proximo.funcionario;
-				this.proximo = this.proximo.proximo;
-			} else { // se nao for, chamo o remover do proximo funcionario
-				this.proximo.remover(CPF);
-			}
-		} else { // chegou no fim e o funcionario a ser removido nao foi encontrado
-			throw new FuncionarioNaoEncontradoException();
+		if (this.funcionario.getCPF().equals(CPF)){ // vejo se esse eh o funcionario procurado
+			this.funcionario = this.proximo.funcionario;
+			this.proximo = this.proximo.proximo;
+		} else { // se nao for, chamo o remover do proximo funcionario
+			this.proximo.remover(CPF);
 		}
 	}
 	
-	public void atualizar(Funcionario funcionario) throws FuncionarioNaoEncontradoException{
+	public void atualizar(Funcionario funcionario) {
 		String CPF = funcionario.getCPF(); //armazeno o CPF do funcionario recebido como parametro numa variavel
-		if (this.funcionario != null){
-			if (this.funcionario.getCPF().equals(CPF)){ //checo se esse eh o funcionario a ser atualizado
-				this.funcionario = funcionario; // atualizo
-			} else { // se nao for, chamo atualizar no proximo funcionario
-				this.proximo.atualizar(funcionario);
-			}
-		} else { // chegou no fim sem encontrar nenhum funcionario com esse CPF
-			throw new FuncionarioNaoEncontradoException();
+		if (this.funcionario.getCPF().equals(CPF)){ //checo se esse eh o funcionario a ser atualizado
+			this.funcionario = funcionario; // atualizo
+		} else { // se nao for, chamo atualizar no proximo funcionario
+			this.proximo.atualizar(funcionario);
 		}
 	}
 	
@@ -91,5 +79,14 @@ public class RepositorioFuncionariosLista implements RepositorioFuncionarios {
 		return existe;
 	}
 	
+	public String toString(){
+		Funcionario funcionario = this.funcionario;
+		String lista = "";
+		while(funcionario != null){
+			lista += funcionario.toString();
+			funcionario = proximo.getFuncionario();
+		}
+		return lista;
+	}
 
 }

@@ -2,8 +2,7 @@
  * 
  */
 package dados;
-import classesbasicas.Funcionario;
-import exceptions.*;
+import classesBasicas.Funcionario;
 
 /**
  * @author lmmc2
@@ -12,9 +11,9 @@ import exceptions.*;
 public interface RepositorioFuncionarios {
 	
 	public void inserir (Funcionario funcionario);
-	public void atualizar (Funcionario funcionario) throws FuncionarioNaoEncontradoException;
-	public void remover (String CPF) throws FuncionarioNaoEncontradoException;
-	public Funcionario procurar (String CPF) throws FuncionarioNaoEncontradoException;
+	public void atualizar (Funcionario funcionario);
+	public void remover (String CPF);
+	public Funcionario procurar (String CPF);
 	public boolean existe (String CPF);
 	
 }

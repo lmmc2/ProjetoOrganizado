@@ -1,6 +1,5 @@
 package dados;
-import classesbasicas.Funcionario;
-import exceptions.*;
+import classesBasicas.Funcionario;
 
 public class RepositorioFuncionariosArray implements RepositorioFuncionarios {
 	private Funcionario[] funcionarios;
@@ -26,27 +25,17 @@ public class RepositorioFuncionariosArray implements RepositorioFuncionarios {
 		indice++;
 	}
 	
-	public void atualizar(Funcionario funcionario) throws FuncionarioNaoEncontradoException{
+	public void atualizar(Funcionario funcionario) {
 		int i = this.getIndice(funcionario.getCPF());
-		if (i == this.indice){
-			//posicao indice nao tem funcionario armazenado, se i igual ao indice entao nao ha o funcionario procurado
-			throw new FuncionarioNaoEncontradoException();
-		} else {
-			this.funcionarios[i] = funcionario;
-		}
+		this.funcionarios[i] = funcionario;
 	}
 	
-	public void remover(String CPF) throws FuncionarioNaoEncontradoException{
+	public void remover(String CPF) {
 		int i = this.getIndice(CPF);
-		if (i == this.indice){
-			//ja que nao tem nenhum funcionario na posicao indice do array
-			throw new FuncionarioNaoEncontradoException();
-		} else {
-			this.indice = this.indice - 1;
-			this.funcionarios[i] = this.funcionarios[this.indice];
-			//coloco o ultimo funcionario na posicao que era do funcionario removido
-			this.funcionarios[this.indice] = null;
-		}
+		this.indice = this.indice - 1;
+		this.funcionarios[i] = this.funcionarios[this.indice];
+		//coloco o ultimo funcionario na posicao que era do funcionario removido
+		this.funcionarios[this.indice] = null;
 	}
 	
 	public int getIndice(String CPF){
@@ -66,15 +55,9 @@ public class RepositorioFuncionariosArray implements RepositorioFuncionarios {
 		return i;
 	}
 	
-	public Funcionario procurar(String CPF) throws FuncionarioNaoEncontradoException{
-		Funcionario encontrado = null;
+	public Funcionario procurar(String CPF) {
 		int i = this.getIndice(CPF);
-		if (i == this.indice){
-			throw new FuncionarioNaoEncontradoException();
-		} else {
-			encontrado = this.funcionarios[i];
-		}
-		return encontrado;
+		return this.funcionarios[i];
 	}
 	
 	public boolean existe (String CPF){
@@ -82,5 +65,13 @@ public class RepositorioFuncionariosArray implements RepositorioFuncionarios {
 		// se nao existir, a posicao retornada pelo getIndice eh o indice
 		return (i != this.indice);
 		//se for diferente entao existe e retorna true, se for igual entao nao existe esse funcionario
+	}
+	
+	public String toString(){
+		String array = "";
+		for (int i = 0; i < indice; i++){
+			array += funcionarios[i].toString();
+		}
+		return array;
 	}
 }
